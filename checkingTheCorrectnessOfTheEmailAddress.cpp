@@ -25,3 +25,30 @@ std::string getLocalPart(const std::string& email) {
     }
     return domainPart;
 }
+
+// Function for checking the correctness of the local part of email
+bool isValidLocalPart(const std::string& localPart) {
+    const std::string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&'*+-/=?^_`{|}~.-";
+    
+    // Checking the length of the local part
+    if (localPart.length() < 1 || localPart.length() > 64) return false;
+
+    bool lastWasDot = false; // to check two points in a row
+    for (size_t i = 0; i < localPart.length(); ++i) {
+        char c = localPart[i];
+        if (validChars.find(c) == std::string::npos) return false; // Check for permissible characters
+        
+        // check for two points in a row
+        if (c == '.') {
+            if (lastWasDot) return false; // Two points in a row are not acceptable
+            lastWasDot = true;
+        } else {
+            lastWasDot = false;
+        }
+    }
+    
+    // check for points at the beginning and at the end
+    if (localPart.front() == '.' || localPart.back() == '.') return false;
+
+    return true;
+}
