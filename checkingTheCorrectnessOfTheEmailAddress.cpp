@@ -92,9 +92,9 @@ int main() {
     std::string domainPart = getDomainPart(email);
 
     // Checking the presence of one symbol @ and the correctness of the address parts
-    if (email.find('@') != std::string::npos && 
-        email.find('@') == email.rfind('@') && 
-        isValidLocalPart(localPart) && 
+    if (email.find('@') != std::string::npos &&
+        email.find('@') == email.rfind('@') &&
+        isValidLocalPart(localPart) &&
         isValidDomainPart(domainPart)) {
         
         std::cout << "Yes" << std::endl; // correct address
