@@ -79,3 +79,27 @@ bool isValidDomainPart(const std::string& domainPart) {
 
     return true;
 }
+
+
+int main() {
+    std::string email;
+    
+    std::cout << "Enter an email address: ";
+    std::cin >> email;
+
+    std::string localPart = getLocalPart(email);
+    std::string domainPart = getDomainPart(email);
+
+    // Checking the presence of one symbol @ and the correctness of the address parts
+    if (email.find('@') != std::string::npos && 
+        email.find('@') == email.rfind('@') && 
+        isValidLocalPart(localPart) && 
+        isValidDomainPart(domainPart)) {
+        
+        std::cout << "Yes" << std::endl; // correct address
+    } else {
+        std::cout << "No" << std::endl; // incorrect address
+    }
+
+    return 0;
+}
