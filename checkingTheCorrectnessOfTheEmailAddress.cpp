@@ -52,3 +52,30 @@ bool isValidLocalPart(const std::string& localPart) {
 
     return true;
 }
+
+// Function for checking the correctness of the domain part of email
+bool isValidDomainPart(const std::string& domainPart) {
+    const std::string validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.-";
+    
+    // Checking the length of the domain part
+    if (domainPart.length() < 1 || domainPart.length() > 63) return false;
+
+    bool lastWasDot = false;// to check two points in a row
+    for (size_t i = 0; i < domainPart.length(); ++i) {
+        char c = domainPart[i];
+        if (validChars.find(c) == std::string::npos) return false; // check for permissible characters
+        
+       // check for two points in a row
+        if (c == '.') {
+            if (lastWasDot) return false; // Two points in a row are not acceptable
+            lastWasDot = true;
+        } else {
+            lastWasDot = false;
+        }
+    }
+
+    // check for points at the beginning and at the end
+    if (domainPart.front() == '.' || domainPart.back() == '.') return false;
+
+    return true;
+}
