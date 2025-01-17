@@ -12,6 +12,7 @@ std::string getLocalPart(const std::string& email) {
 }
 
 // Function for obtaining the second part of email (after symbol @)std::string getDomainPart(const std::string& email) {
+    std::string getDomainPart(const std::string& email) {
     std::string domainPart;
     bool atFound = false; // flag for checking the presence of a symbol @
     for (char c : email) {
